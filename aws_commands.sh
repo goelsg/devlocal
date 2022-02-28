@@ -1,18 +1,23 @@
 #### Baisc Setup
 export AWS_PROFILE root
 export DOCKER_BUILDKIT=0
-export spring.profiles.active=dev
 export vault_username=root
 export vault_password=root
-export VAULT_ADDR=http://127.0.0.1:8443 AWS_SECURITY_TOKEN=+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4Olgk
+export VAULT_ADDR=http://127.0.0.1:8443 
 export AWS_ACCESS_KEY_ID=root
 export AWS_DEFAULT_REGION=ap-south-east-1
 export AWS_ROLE_ARN=arn:aws:iam::000000000000:role/Test-Role
 export JAVA_HOME=/usr/bin/java
 
+localstack start -d >> result.txt
+
+vault server -config ./vault/config.hcl 
+
 vault operator unseal ZU8GfGFDtYw8rrIx6opCjRMl4Kfo3uTGs+ccJM0jEoE=
 
-vault login s.xbK0FOvTiBoNacVp21DrhYuF 
+vault login s.xbK0FOvTiBoNacVp21DrhYuF
+
+localstack start -d >> result.txt
 
 ### Aws Resources
 

@@ -82,37 +82,46 @@ RUN python3 -m pip config debug
 RUN cd /usr/local/src 
 RUN yum install wget -y
 RUN yum install make -y
-RUN wget http://download.redis.io/redis-stable.tar.gz
-RUN tar xvzf redis-stable.tar.gz
-RUN rm -f redis-stable.tar.gz
-RUN cd redis-stable
-RUN yum groupinstall "Development Tools" -y
-RUN make distclean
-RUN make
-RUN yum install -y tcl
-RUN make test
-RUN cp src/redis-server /usr/local/bin/
-RUN cp src/redis-cli /usr/local/bin/
-RUN redis-server
+#RUN wget http://download.redis.io/redis-stable.tar.gz
+#RUN tar xvzf redis-stable.tar.gz
+#RUN rm -f redis-stable.tar.gz
+#RUN cd redis-stable
+#RUN yum groupinstall "Development Tools" -y
+#RUN make distclean
+#RUN make
+#RUN yum install -y tcl
+#RUN make test
+#RUN cp src/redis-server /usr/local/bin/
+#RUN cp src/redis-cli /usr/local/bin/
+#RUN redis-server
 
 ##### VAULT
-RUN yum install vault -y
-RUN COPY ${vault} ./
+RUN yum install -y yum-utils
+RUN yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+RUN yum -y install vault
+RUN yum reinstall vault -y
+RUN vault --version
+#RUN setcap -r /usr/bin/vault
+RUN mkdir -p vault
+COPY ${vault} ./vault
+RUN ls -latr
 
 ###LOCAL-STACK
 RUN python3 --version
 RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org flask
 RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --upgrade pip wheel setuptools>=46.1.0
-RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --user -r /localstack/requirements.txt
-RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org config --user localstack config --global http.sslVerify false
+#RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --user -r /localstack/requirements.txt
+RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org config --user localstack
 RUN yum -y install gcc make # install GCC compiler
 
 
 ########3FILES
-RUN mkdir -p configs && COPY ${configs} /configs/
-RUN mkdir -p startScript && COPY ${startScript} /startScript/
-RUN COPY ${aws} .
-RUN COPY ${aws} ~/
+RUN mkdir -p configs
+COPY ${configs} /configs/
+RUN mkdir -p startScript
+COPY ${startScript} /startScript/
+COPY ${aws} .
+COPY ${aws} ~/
 #Ls Command
 RUN ln -fs app.jar 
 RUN ls -latr ./
