@@ -90,6 +90,10 @@ RUN yum groupinstall "Development Tools" -y
 RUN make distclean
 RUN make
 RUN yum install -y tcl
+RUN make test
+RUN cp src/redis-server /usr/local/bin/
+RUN cp src/redis-cli /usr/local/bin/
+RUN redis-server
 
 ##### VAULT
 RUN yum install vault -y
