@@ -1,24 +1,18 @@
 #### Baisc Setup
 export AWS_PROFILE root
 export DOCKER_BUILDKIT=0
+export spring.profiles.active=dev
+export vault_username=root
+export vault_password=root
+export VAULT_ADDR=http://127.0.0.1:8443 AWS_SECURITY_TOKEN=+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4Olgk
+export AWS_ACCESS_KEY_ID=root
+export AWS_DEFAULT_REGION=ap-south-east-1
+export AWS_ROLE_ARN=arn:aws:iam::000000000000:role/Test-Role
+export JAVA_HOME=/usr/bin/java
+
+vault operator unseal ZU8GfGFDtYw8rrIx6opCjRMl4Kfo3uTGs+ccJM0jEoE=
 
 vault login s.xbK0FOvTiBoNacVp21DrhYuF 
-
-### vault DB Roles
-
-vault write database/roles/dev db_name=sms_ml_service creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT, UPDATE, INSERT, DELETE ON *.* TO '{{name}}'@'%';" default_ttl="5" max_ttl="5"
-
-vault write database/config/sms_ml_service plugin_name=mysql-database-plugin connection_url="root:root@tcp(127.0.0.1:3306)/sms_ml_service" allowed_roles="dev" username="root" password="root"
-
-vault write database/roles/dev db_name=fcCibil creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT, UPDATE, INSERT, DELETE ON *.* TO '{{name}}'@'%';" default_ttl="5" max_ttl="5"
-
-vault write database/config/fcCibil plugin_name=mysql-database-plugin connection_url="root:root@tcp(127.0.0.1:3306)/fcCibil" allowed_roles="dev" username="root" password="root"
-
-vault write database/roles/dev db_name=fc_attributes creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" default_ttl="1m" max_ttl="1m"	
-
-vault write database/config/fc_attributes plugin_name=mysql-database-plugin connection_url="root:root@tcp(127.0.0.1:3306)/fc_attributes" allowed_roles="dev" username="root" password="root"
-
-vault read database/creds/dev 
 
 ### Aws Resources
 

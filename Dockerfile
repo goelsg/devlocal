@@ -11,6 +11,7 @@ ENV LD_BIND_NOW 1
 ARG configs=./files/*
 ARG startScript=./aws_commands.sh
 ARG aws=./.aws
+ARG vault=./vault
 
 # INSTALL JAVA
 # ==============================================================
@@ -76,11 +77,31 @@ RUN ls -latr
 RUN ls -latr /localstack
 RUN python3 -m pip config debug
 #RUN cat $HOME/.config/pip/pip.conf
+
+###REDIS
+RUN cd /usr/local/src 
+RUN yum install wget -y
+RUN yum install make -y
+RUN wget http://download.redis.io/redis-stable.tar.gz
+RUN tar xvzf redis-stable.tar.gz
+RUN rm -f redis-stable.tar.gz
+RUN cd redis-stable
+RUN yum groupinstall "Development Tools" -y
+RUN make distclean
+RUN make
+RUN yum install -y tcl
+
+##### VAULT
+RUN yum install vault -y
+RUN COPY ${vault} ./
+
+###LOCAL-STACK
 RUN python3 --version
 RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org flask
 RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --upgrade pip wheel setuptools>=46.1.0
 RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --user -r /localstack/requirements.txt
 RUN python3 -m pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org config --user localstack config --global http.sslVerify false
+RUN yum -y install gcc make # install GCC compiler
 
 
 ########3FILES

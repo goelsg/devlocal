@@ -1,0 +1,114 @@
+{
+  "keys": [
+    "b9be5d4b66e8a759f74250745f77979de4f125be786e70ceec0c061898c577a8"
+  ],
+  "keys_base64": [
+    "ub5dS2bop1n3QlB0X3eXneTxJb54bnDO7AwGGJjFd6g="
+  ],
+  "root_token": "s.jbqwdbUDFui9YVZNMLUWxj7D"
+}
+
+
+{
+  "cache.pincode.city.size": "10",
+  "cache.validity.size": "10",
+  "management.endpoint.health.show-details": "\"always\"",
+  "management.endpoint.shutdown.enabled": "false",
+  "management.endpoints.health.sensitive": "false",
+  "management.endpoints.web.base-path": "/fc/cibil",
+  "management.endpoints.web.exposure.exclude": "\"env,beans\"",
+  "management.endpoints.web.exposure.include": "\"*\"",
+  "management.health.defaults.enabled": "true",
+  "management.health.diskspace.enabled": "true",
+  "no.of.threads": "2",
+  "server.port": "9443",
+  "swagger.profiles.active": "dev"
+}
+
+{
+  "cache.pincode.city.size": 10,
+  "cache.validity.size": 10,
+  "swagger.profiles.active": "dev"
+  "management.endpoint.health.show-details": "always",
+  "management.endpoint.shutdown.enabled": "false",
+  "management.endpoints.health.sensitive": "false",
+  "management.endpoints.web.base-path": "/fc/cibil",
+  "management.endpoints.web.exposure.exclude": "env,beans",
+  "management.endpoints.web.exposure.include": "*",
+  "management.health.defaults.enabled": "true",
+  "management.health.diskspace.enabled": "true",
+  "no.of.threads": 2,
+  "server.port": 9443,
+  "swagger.profiles.active": "dev"
+}
+
+
+
+{
+  "aws.arn": "arn:aws:iam::794035676255:role/shadow_mode",
+  "aws.arn.name": "shadow_mode",
+  "fc.sqs.long.poll.timeout": 10,
+  "fc.sqs.message.batchSize": 3,
+  "fc.sqs.message.delay.secs": 2,
+  "fc.sqs.process.thread.count": 3,
+  "fc.sqs.region": "ap-southeast-1",
+  "fc.sqs.retry.count": 3,
+  "fc.sqs.retry.visibility.timeout": 150,
+  "fcc.rule.s3.data.expirationTime": 30,
+  "fcc.rule.s3.enabled": false,
+  "fcc.rule.s3.reports.expirationTime": 180,
+  "fcc.rule.s3.upload.tmp.folder": "/tmp/upload/rules",
+  "fcc.rules.s3.data.bucket": "fb-cibil-data/user-data",
+  "fcc.rules.s3.region": "ap-southeast-1",
+  "fcc.rules.s3.reports.bucket": "fb-cibil-reports/user-pdfs"
+}
+
+
+{
+  "hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
+  "hibernate.connection.driver_class" : "com.mysql.jdbc.Driver",
+  "hibernate.connection.url" : "jdbc:mysql://localhost:3306/fcCibil",
+  "hibernate.connection.username" : "root",
+  "hibernate.connection.password" : "root",
+  "hibernate.connection.pool_size" : 10,
+  "hibernate.hbm2ddl.auto" : "none",
+  "hibernate.maxpool.size" : 10,
+  "hibernate.minimum.idle" : 8,
+  "spring.jpa.show-sql" : true,
+  "spring.jpa.properties.hibernate.format_sql" : true,
+  "logging.level.org.hibernate.SQL" : "DEBUG",
+  "logging.level.org.hibernate.type.descriptor.sql.BasicBinder" : "TRACE"
+}
+
+
+
+
+# Enable secrets engine
+path "sys/mounts/*" {
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# List enabled secrets engine
+path "sys/mounts" {
+  capabilities = [ "read", "list" ]
+}
+
+# Mount secrets engines
+path "sys/mounts/*" {
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Configure the openldap secrets engine and create roles
+path "openldap/*" {
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Write ACL policies
+path "sys/policies/acl/*" {
+  capabilities = [ "create", "read", "update", "delete", "list" ]
+}
+
+# Manage tokens for verification
+path "auth/token/create" {
+  capabilities = [ "create", "read", "update", "delete", "list", "sudo" ]
+}
