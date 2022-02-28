@@ -1,0 +1,231 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:ListBucket",
+                "s3:DeleteBucket",
+                "s3:GetBucketLocation",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:GetObjectVersion",
+                "s3:GetBucketPolicy",
+                "s3:PutBucketPolicy",
+                "s3:GetBucketAcl",
+                "s3:PutBucketVersioning",
+                "s3:GetBucketVersioning",
+                "s3:PutLifecycleConfiguration",
+                "s3:GetLifecycleConfiguration",
+                "s3:DeleteBucketPolicy"
+            ],
+            "Resource": [
+				"arn:aws:s3:::*", 
+				"*"
+			]
+        },
+		{
+            "Action": [
+                "sqs:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+		{
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        },
+		{
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::s3-analytics-export-shared-*"
+            ]
+        },
+        {
+            "Action": [
+                "s3:GetAnalyticsConfiguration",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+		{
+            "Action": [
+                "dynamodb:*",
+				"dynamodb:PartiQLInsert",
+				"dynamodb:PartiQLUpdate",
+				"dynamodb:PartiQLDelete",
+				"dynamodb:PartiQLSelect",
+                "dax:*",
+                "application-autoscaling:DeleteScalingPolicy",
+                "application-autoscaling:DeregisterScalableTarget",
+                "application-autoscaling:DescribeScalableTargets",
+                "application-autoscaling:DescribeScalingActivities",
+                "application-autoscaling:DescribeScalingPolicies",
+                "application-autoscaling:PutScalingPolicy",
+                "application-autoscaling:RegisterScalableTarget",
+                "cloudwatch:DeleteAlarms",
+                "cloudwatch:DescribeAlarmHistory",
+                "cloudwatch:DescribeAlarms",
+                "cloudwatch:DescribeAlarmsForMetric",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics",
+                "cloudwatch:PutMetricAlarm",
+                "datapipeline:ActivatePipeline",
+                "datapipeline:CreatePipeline",
+                "datapipeline:DeletePipeline",
+                "datapipeline:DescribeObjects",
+                "datapipeline:DescribePipelines",
+                "datapipeline:GetPipelineDefinition",
+                "datapipeline:ListPipelines",
+                "datapipeline:PutPipelineDefinition",
+                "datapipeline:QueryObjects",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "iam:GetRole",
+                "iam:ListRoles",
+                "kms:DescribeKey",
+                "kms:ListAliases",
+                "sns:CreateTopic",
+                "sns:DeleteTopic",
+                "sns:ListSubscriptions",
+                "sns:ListSubscriptionsByTopic",
+                "sns:ListTopics",
+                "sns:Subscribe",
+                "sns:Unsubscribe",
+                "sns:SetTopicAttributes",
+                "lambda:CreateFunction",
+                "lambda:ListFunctions",
+                "lambda:ListEventSourceMappings",
+                "lambda:CreateEventSourceMapping",
+                "lambda:DeleteEventSourceMapping",
+                "lambda:GetFunctionConfiguration",
+                "lambda:DeleteFunction",
+                "resource-groups:ListGroups",
+                "resource-groups:ListGroupResources",
+                "resource-groups:GetGroup",
+                "resource-groups:GetGroupQuery",
+                "resource-groups:DeleteGroup",
+                "resource-groups:CreateGroup",
+                "tag:GetResources",
+				"*:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": "cloudwatch:GetInsightRuleReport",
+            "Effect": "Allow",
+            "Resource": "arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*"
+        },
+		{
+            "Action": "cloudwatch:GetInsightRuleReport",
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "iam:PassRole"
+				"*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "StringLike": {
+                    "iam:PassedToService": [
+                        "application-autoscaling.amazonaws.com",
+                        "dax.amazonaws.com"
+						"*"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateServiceLinkedRole"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "iam:AWSServiceName": [
+                        "replication.dynamodb.amazonaws.com",
+                        "dax.amazonaws.com",
+                        "dynamodb.application-autoscaling.amazonaws.com",
+                        "contributorinsights.dynamodb.amazonaws.com"
+                    ]
+                }
+            }
+        },
+		{
+            "Action": [
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+                "sqs:ListDeadLetterSourceQueues",
+                "sqs:ListQueues"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+		{
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": "*"
+        },
+		{
+            "Effect": "Allow",
+            "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        },
+		{
+         "Effect":"Allow",
+         "Action":[
+            "dynamodb:PartiQLInsert",
+            "dynamodb:PartiQLUpdate",
+            "dynamodb:PartiQLDelete",
+            "dynamodb:PartiQLSelect",
+			"*"
+         ],
+         "Resource":[
+            "arn:aws:dynamodb:us-east-1:000000000000:table/Sms_Transactional_Data",
+			"arn:aws:dynamodb:us-east-1:000000000000:table/userpreferences_userpreferences_dev",
+			"arn:aws:dynamodb:us-east-1:000000000000:table/userpreferences_usertoken_dev",
+			"arn:aws:dynamodb:us-east-1:000000000000:table/userpreferences_frequencycounters_dev",
+			"arn:aws:dynamodb:us-east-1:000000000000:table/userpreferences_usermpin_dev",
+			"arn:aws:dynamodb:us-east-1:000000000000:table/userpreferences_securedelement_dev",
+			"arn:aws:dynamodb:us-east-1:000000000000:table/userpreferences_securityquestion_dev",
+			"*"
+         ]
+      }, 
+	  {
+		 "Effect":"Allow",
+         "Action":[
+			"sns:Publish",
+			"sns:*",
+			"*"
+         ],
+         "Resource":[
+			"arn:aws:sns:us-east-1:000000000000:sns_local_dev",
+			"*"
+         ]
+	  }
+    ]
+}

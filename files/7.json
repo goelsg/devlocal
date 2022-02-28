@@ -1,0 +1,15 @@
+{
+  "TableName": "userpreferences_ownerUrlMapping_dev",
+"KeySchema": [
+    { "AttributeName": "owner", "KeyType": "HASH" },
+	{ "AttributeName": "serviceName", "KeyType": "RANGE" }
+  ],
+  "AttributeDefinitions": [
+    { "AttributeName": "owner", "AttributeType": "S" },
+	{ "AttributeName": "serviceName", "AttributeType": "S" }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

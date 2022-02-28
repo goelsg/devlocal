@@ -1,0 +1,15 @@
+{
+  "TableName": "userpreferences_usertoken_dev",
+  "KeySchema": [
+    { "AttributeName": "userId", "KeyType": "HASH" },
+	{ "AttributeName": "loginToken", "KeyType": "RANGE" }
+  ],
+  "AttributeDefinitions": [
+    { "AttributeName": "userId", "AttributeType": "S" },
+	{ "AttributeName": "loginToken", "AttributeType": "S" }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

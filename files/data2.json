@@ -1,0 +1,17 @@
+{
+  "active": {
+    "N": "1"
+  },
+  "elementId": {
+    "S": "125"
+  },
+  "elementName": {
+    "S": "FC"
+  },
+  "otpVerificationOwner": {
+    "S": "FC"
+  },
+  "priority": {
+    "S": "MANDATORY"
+  }
+}

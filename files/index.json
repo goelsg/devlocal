@@ -1,0 +1,22 @@
+[
+    {
+        "Create": {
+            "IndexName": "hashcode-index-b",
+            "KeySchema": [
+                {
+                    "AttributeName": "hashcode",
+                    "KeyType": "HASH"
+                },
+                    { "AttributeName": "imsId", "KeyType": "RANGE" }
+
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 10,
+                "WriteCapacityUnits": 10
+            },
+            "Projection": {
+                "ProjectionType": "ALL"
+            }
+        }
+    }
+]

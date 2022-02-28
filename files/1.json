@@ -1,0 +1,13 @@
+{
+  "TableName": "userpreferences_securityquestion_dev",
+  "KeySchema": [
+    { "AttributeName": "questionId", "KeyType": "HASH" }
+  ],
+  "AttributeDefinitions": [
+    { "AttributeName": "questionId", "AttributeType": "S" }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

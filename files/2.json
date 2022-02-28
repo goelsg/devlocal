@@ -1,0 +1,13 @@
+{
+  "TableName": "userpreferences_securedelement_dev",
+  "KeySchema": [
+    { "AttributeName": "elementId", "KeyType": "HASH" }
+  ],
+  "AttributeDefinitions": [
+    { "AttributeName": "elementId", "AttributeType": "S" }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}

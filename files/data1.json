@@ -1,0 +1,17 @@
+{
+  "active": {
+    "N": "1"
+  },
+  "elementId": {
+    "S": "124"
+  },
+  "elementName": {
+    "S": "VCC"
+  },
+  "otpVerificationOwner": {
+    "S": "AXIS"
+  },
+  "priority": {
+    "S": "MANDATORY"
+  }
+}
