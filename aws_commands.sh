@@ -9,7 +9,7 @@ export AWS_DEFAULT_REGION=ap-south-east-1
 export AWS_ROLE_ARN=arn:aws:iam::000000000000:role/Test-Role
 export JAVA_HOME=/usr/bin/java
 
-localstack start -d >> result.txt
+localstack start -d
 
 vault server -config ./vault/config.hcl 
 

@@ -116,7 +116,7 @@
                 "resource-groups:DeleteGroup",
                 "resource-groups:CreateGroup",
                 "tag:GetResources",
-				"*:*"
+				"*"
             ],
             "Effect": "Allow",
             "Resource": "*"
@@ -133,7 +133,7 @@
         },
         {
             "Action": [
-                "iam:PassRole"
+                "iam:PassRole",
 				"*"
             ],
             "Effect": "Allow",
@@ -142,7 +142,7 @@
                 "StringLike": {
                     "iam:PassedToService": [
                         "application-autoscaling.amazonaws.com",
-                        "dax.amazonaws.com"
+                        "dax.amazonaws.com",
 						"*"
                     ]
                 }
